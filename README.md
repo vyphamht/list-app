@@ -1,1 +1,1 @@
-Bad asignment
+Bad assignment
