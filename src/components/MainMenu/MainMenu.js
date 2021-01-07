@@ -1,13 +1,18 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Item from "../Item/Item";
+import "./MainMenu.css";
+import LoaderNow from "../Loader/Loader";
 
 const MainMenu = () => {
   const [data, setData] = useState("");
   const [category, setCategory] = useState("");
 
-  const buttonClicked = (e) => {
+  const buttonClicked = async (e) => {
     e.preventDefault();
-    setCategory(e.target.name);
+    await setCategory(e.target.name);
+    setData(<LoaderNow />);
   };
   useEffect(() => {
     axios
@@ -19,24 +24,52 @@ const MainMenu = () => {
       })
       .then((res) => {
         console.log(`${category} is fired`);
-        const list = res.data.map((item) => <li key={item.id}>{item.name}</li>);
+
+        const list = res.data.map((item) => (
+          <Router key={item.id}>
+            <div className="list">
+              <li>
+                {item.name}{" "}
+                <button>
+                  <Link to={`/${item.id}`}>Check</Link>
+                </button>
+              </li>
+            </div>
+
+            <Switch>
+              <Route path={`/${item.id}`}>
+                <Item
+                  unique={item.id}
+                  name={item.name}
+                  color={item.color.map((color) => (
+                    <li key={color}>{color}</li>
+                  ))}
+                  price={item.price}
+                  manufacturer={item.manufacturer}
+                />
+              </Route>
+            </Switch>
+          </Router>
+        ));
         setData(list);
       });
   }, [category]);
 
   return (
-    <div>
-      <button onClick={buttonClicked} name="gloves">
-        Gloves
-      </button>
-      <button name="facemasks" onClick={buttonClicked}>
-        Face Masks
-      </button>
-      <button name="beanies" onClick={buttonClicked}>
-        Beanies
-      </button>
-      {data}
-    </div>
+    <Router>
+      <div>
+        <button onClick={buttonClicked} name="gloves">
+          Gloves
+        </button>
+        <button name="facemasks" onClick={buttonClicked}>
+          Face Masks
+        </button>
+        <button name="beanies" onClick={buttonClicked}>
+          Beanies
+        </button>
+        {data}
+      </div>
+    </Router>
   );
 };
 
