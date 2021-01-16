@@ -14,9 +14,10 @@ const MainMenu = () => {
     await setCategory(e.target.name);
     setData(<LoaderNow />);
   };
+  let url = `/v2/products/${category}`;
   useEffect(() => {
     axios
-      .get(`/v2/products/${category}`, {
+      .get(url, {
         headers: {
           "access-control-allow-origin": "*",
           "Content-type": "application/json; charset=UTF-8",
@@ -51,9 +52,14 @@ const MainMenu = () => {
             </Switch>
           </Router>
         ));
-        setData(list);
+        setData(
+          <div>
+            <h1>Below is the list of {category}</h1>
+            <div>{list}</div>
+          </div>
+        );
       });
-  }, [category]);
+  }, [category, url]);
 
   return (
     <Router>

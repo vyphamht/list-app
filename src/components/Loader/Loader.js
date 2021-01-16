@@ -3,8 +3,17 @@ import React from "react";
 
 const LoaderNow = () => {
   return (
-    <div>Loading...</div>
-    // <Loader type="Oval" color="#00BFFF" height={50} width={50} timeout={7000} />
+    <div>
+      {" "}
+      Loading now...
+      {/* <Loader
+        type="Oval"
+        color="#00BFFF"
+        height={50}
+        width={50}
+        timeout={7000}
+      /> */}
+    </div>
   );
 };
 
