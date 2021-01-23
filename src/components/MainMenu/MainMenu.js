@@ -26,12 +26,8 @@ const MainMenu = () => {
       .get(url, {
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods":
-            "GET, PUT, POST, DELETE, HEAD, OPTIONS",
+          "Access-Control-Allow-Methods": "GET",
           "Content-type": "application/json; charset=UTF-8",
-          // proxy: {
-          //   target: "https://vyphamht-list-app.web.app/",
-          // },
         },
       })
       .then((res) => {
