@@ -8,12 +8,16 @@ import LoaderNow from "../Loader/Loader";
 const MainMenu = () => {
   const [data, setData] = useState("");
   const [category, setCategory] = useState("");
+  const [heading, setHeading] = useState("");
 
   const buttonClicked = async (e) => {
     e.preventDefault();
     await setCategory(e.target.name);
+    await setHeading(`List of ${e.target.name}`);
+
     setData(<LoaderNow />);
   };
+
   let url = `/v2/products/${category}`;
   useEffect(() => {
     axios
@@ -32,7 +36,7 @@ const MainMenu = () => {
               <li>
                 {item.name}{" "}
                 <button>
-                  <Link to={`/${item.id}`}>Check</Link>
+                  <Link to={`/${item.id}`}>See Detail</Link>
                 </button>
               </li>
             </div>
@@ -54,7 +58,6 @@ const MainMenu = () => {
         ));
         setData(
           <div>
-            <h1>Below is the list of {category}</h1>
             <div>{list}</div>
           </div>
         );
@@ -63,16 +66,19 @@ const MainMenu = () => {
 
   return (
     <Router>
-      <div>
-        <button onClick={buttonClicked} name="gloves">
-          Gloves
-        </button>
-        <button name="facemasks" onClick={buttonClicked}>
-          Face Masks
-        </button>
-        <button name="beanies" onClick={buttonClicked}>
-          Beanies
-        </button>
+      <div className="menu">
+        <div className="nav">
+          <button onClick={buttonClicked} name="gloves">
+            Gloves
+          </button>
+          <button name="facemasks" onClick={buttonClicked}>
+            Face Masks
+          </button>
+          <button name="beanies" onClick={buttonClicked}>
+            Beanies
+          </button>
+        </div>
+        <h1>{heading}</h1>
         {data}
       </div>
     </Router>
