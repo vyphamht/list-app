@@ -1,15 +1,17 @@
 {
   "name": "list-app",
   "version": "0.1.0",
-  "private": false,
-  "proxy": "https://bad-api-assignment.reaktor.com",
+  "private": true,
+  "proxy": "https://vyphamht-list-app.web.app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "cors-proxy": "^1.0.3",
     "http-proxy-middleware": "^1.0.6",
+    "local-cors-proxy": "^1.1.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
@@ -22,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "proxy": "lcp --proxyUrl https://vyphamht-list-app.web.app/"
   },
   "eslintConfig": {
     "extends": [

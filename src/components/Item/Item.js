@@ -3,19 +3,26 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Item.css";
 
+const cors = "https://cors-anywhere.herokuapp.com/";
+
 const Item = (props) => {
   const [available, setAvailable] = useState("waiting a bit...");
   useEffect(() => {
     axios
-      .get(`/v2/availability/${props.manufacturer}`, {
-        headers: {
-          "access-control-allow-origin": "*",
-          "Content-type": "application/json; charset=UTF-8",
-          proxy: {
-            target: "https://bad-api-assignment.reaktor.com",
+      .get(
+        `${cors}https://bad-api-assignment.reaktor.com/v2/availability/${props.manufacturer}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods":
+              "GET, PUT, POST, DELETE, HEAD, OPTIONS",
+            "Content-type": "application/json; charset=UTF-8",
+            // proxy: {
+            //   target: "https://vyphamht-list-app.web.app/",
+            // },
           },
-        },
-      })
+        }
+      )
       .then((res) => {
         const data = res.data.response;
         const found = data

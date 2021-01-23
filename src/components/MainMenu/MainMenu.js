@@ -5,6 +5,8 @@ import Item from "../Item/Item";
 import "./MainMenu.css";
 import LoaderNow from "../Loader/Loader";
 
+const cors = "https://cors-anywhere.herokuapp.com/";
+
 const MainMenu = () => {
   const [data, setData] = useState("");
   const [category, setCategory] = useState("");
@@ -18,13 +20,18 @@ const MainMenu = () => {
     setData(<LoaderNow />);
   };
 
-  let url = `/v2/products/${category}`;
+  let url = `${cors}https://bad-api-assignment.reaktor.com/v2/products/${category}`;
   useEffect(() => {
     axios
       .get(url, {
         headers: {
-          "access-control-allow-origin": "*",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods":
+            "GET, PUT, POST, DELETE, HEAD, OPTIONS",
           "Content-type": "application/json; charset=UTF-8",
+          // proxy: {
+          //   target: "https://vyphamht-list-app.web.app/",
+          // },
         },
       })
       .then((res) => {
